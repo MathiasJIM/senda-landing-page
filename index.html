@@ -353,33 +353,7 @@
         <p>&copy; 2026 Senda. Todos los derechos reservados.</p>
       </div>
     </footer>
-    <script>
-      (function () {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) {
-              e.target.classList.add('visible');
-              io.unobserve(e.target);
-            }
-          });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) {
-          io.observe(el);
-        });
-      })();
-    </script>
-    <script>
-      (function () {
-        document.addEventListener('click', function (event) {
-          var cta = event.target.closest('a[href="calendario.html"]');
-          if (!cta) return;
-          if (typeof fbq !== 'function') return;
-          fbq('trackCustom', 'CalendarView', {
-            cta: cta.getAttribute('data-cta') || 'unknown'
-          });
-        });
-      })();
-    </script>
+    <script src="js/reveal.js"></script>
+    <script src="js/pixel-cta.js"></script>
   </body>
 </html>

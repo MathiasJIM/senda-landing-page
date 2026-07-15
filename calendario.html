@@ -86,17 +86,6 @@
          quitamos el min-width para no forzar scroll horizontal y
          damos altura generosa para que quepan calendario + horarios +
          formulario sin que se corte. */
-      .calendar-mobile-fallback {
-        display: none;
-        margin: 24px auto 0;
-        max-width: 640px;
-        text-align: center;
-      }
-      .calendar-mobile-fallback p {
-        color: var(--muted-strong);
-        font-size: 0.95rem;
-        margin-bottom: 12px;
-      }
       @media (max-width: 1040px) {
         .calendar-embed {
           overflow: visible;
@@ -116,9 +105,6 @@
         }
         .calendly-inline-widget {
           height: 1200px;
-        }
-        .calendar-mobile-fallback {
-          display: block;
         }
       }
       @media (max-width: 420px) {
@@ -168,47 +154,10 @@
             data-url="https://calendly.com/isaacvindas/45min?hide_gdpr_banner=1&background_color=ffffff&text_color=24231b&primary_color=ca9219"
           ></div>
         </div>
-
-        <div class="calendar-mobile-fallback">
-          <p>¿Ve el formulario cortado?</p>
-          <a
-            class="button button-primary"
-            href="https://calendly.com/isaacvindas/45min?hide_gdpr_banner=1&background_color=ffffff&text_color=24231b&primary_color=ca9219"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Abrir calendario en pantalla completa
-          </a>
-        </div>
       </div>
     </main>
     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <script>
-      (function () {
-        var bookingTracked = false;
-
-        function isCalendlyEvent(e) {
-          return (
-            e.origin === 'https://calendly.com' &&
-            e.data &&
-            typeof e.data.event === 'string' &&
-            e.data.event.indexOf('calendly.') === 0
-          );
-        }
-
-        window.addEventListener('message', function (event) {
-          if (!isCalendlyEvent(event)) return;
-          if (event.data.event !== 'calendly.event_scheduled') return;
-          if (bookingTracked) return;
-          bookingTracked = true;
-          if (typeof fbq === 'function') {
-            fbq('track', 'Schedule', {
-              content_name: 'Calendly meeting booked'
-            });
-          }
-        });
-      })();
-    </script>
+    <script src="js/pixel-calendly.js"></script>
 
     <footer class="site-footer">
       <div class="container footer-inner">

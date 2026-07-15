@@ -6,3 +6,6 @@
 
 /*.css
   Cache-Control: public, max-age=3600, must-revalidate
+
+/js/*
+  Cache-Control: public, max-age=3600, must-revalidate
