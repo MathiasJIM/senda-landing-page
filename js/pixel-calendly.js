@@ -1,9 +1,19 @@
 (function () {
   var bookingTracked = false;
 
+  function isCalendlyOrigin(origin) {
+    try {
+      var url = new URL(origin);
+      if (url.protocol !== 'https:') return false;
+      return url.hostname === 'calendly.com' || url.hostname.endsWith('.calendly.com');
+    } catch (e) {
+      return false;
+    }
+  }
+
   function isCalendlyEvent(e) {
     return (
-      e.origin === 'https://calendly.com' &&
+      isCalendlyOrigin(e.origin) &&
       e.data &&
       typeof e.data.event === 'string' &&
       e.data.event.indexOf('calendly.') === 0
